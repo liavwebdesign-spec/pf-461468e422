@@ -700,7 +700,8 @@ navItems.forEach(n => n.addEventListener('click', e=>{
   e.stopPropagation();
   const s = +n.dataset.goto;
   prioritize(s);
-  scrollTo({top: seg[s].start, behavior:'auto'});
+  /* +1: on screens scaled 110/125/150% the browser rounds the scroll position to a device pixel and can land just short of the scene start, showing the previous scene */
+  scrollTo({top: seg[s].start + 1, behavior:'auto'});
 }));
 function restart(){ scrollTo({top:0, behavior:'auto'}); viewY = 0; render(); }
 
